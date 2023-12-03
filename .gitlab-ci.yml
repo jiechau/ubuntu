@@ -21,7 +21,7 @@ build_image:
     #- docker build -t $IMAGE_TAG .
     - docker build . -t jiechau/ubuntu:22.04 -t jiechau/ubuntu:latest -t jiechau/ubuntu
     #
-    - docker push jiechau/ubuntu
-    - docker push jiechau/ubuntu:22.04
+    - docker push $CI_REGISTRY_IMAGE
+    #- docker push jiechau/ubuntu:22.04
   only:
     - main
