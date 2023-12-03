@@ -3,15 +3,23 @@ stages:
   - push
 
 variables:
-  IMAGE_TAG: $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG
+  DOCKER_DRIVER: overlay2
+  DOCKER_TLS_CERTDIR: ""
+  IMAGE_NAME: my-image-name # Replace with your image name
+  IMAGE_TAG: latest # Replace with your desired tag or use $CI_COMMIT_REF_SLUG for dynamic tagging
+
+services:
+  - docker:dind
 
 before_script:
+  #- docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_PASSWORD # Replace with your registry if not Docker Hub
   - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
   - echo 'aaaaaaaa'
   - echo $CI_COMMIT_REF_SLUG
   - echo 'bbbbbbbb'
 
 build_image:
+  image: docker:latest
   stage: build
   script:
     #- docker build -t $IMAGE_TAG .
@@ -20,6 +28,7 @@ build_image:
     - main
 
 push_to_registry:
+  image: docker:latest
   stage: push
   script:
     #- docker push $IMAGE_TAG
