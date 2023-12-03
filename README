@@ -1,5 +1,10 @@
 docker build . -t jiechau/ubuntu:22.04 -t jiechau/ubuntu:latest -t jiechau/ubuntu
-docker push jiechau/ubuntu; docker push jiechau/ubuntu:22.04
+docker push jiechau/ubuntu
+docker push jiechau/ubuntu:22.04
 
 docker run -it --rm jiechau/ubuntu
+docker run -it --rm registry.gitlab.com/jiechau/ubuntu
+docker run -it --rm ghcr.io/jiechau/ubuntu
 kubectl run my-shell -it --rm -n aiapi --image jiechau/ubuntu -- bash
+kubectl run my-shell -it --rm -n aiapi --image registry.gitlab.com/jiechau/ubuntu -- bash
+kubectl run my-shell -it --rm -n aiapi --image ghcr.io/jiechau/ubuntu -- bash
