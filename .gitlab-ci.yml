@@ -19,7 +19,8 @@ do_gitlab:
     - docker build . -t $CI_REGISTRY_IMAGE:22.04 -t $CI_REGISTRY_IMAGE:latest -t $CI_REGISTRY_IMAGE
     ## docker run -it --rm registry.gitlab.com/jiechau/ubuntu
     - docker push $CI_REGISTRY_IMAGE
-    #- docker push $CI_REGISTRY_IMAGE:22.04
+    - docker push $CI_REGISTRY_IMAGE:latest
+    - docker push $CI_REGISTRY_IMAGE:22.04
   only:
     - main
 
@@ -31,6 +32,7 @@ do_dockerhub:
     - docker build . -t jiechau/ubuntu:22.04 -t jiechau/ubuntu:latest -t jiechau/ubuntu
     ## docker run -it --rm jiechau/ubuntu 
     - docker push jiechau/ubuntu
-    #- docker push jiechau/ubuntu:22.04
+    - docker push jiechau/ubuntu:latest
+    - docker push jiechau/ubuntu:22.04
   only:
     - main
