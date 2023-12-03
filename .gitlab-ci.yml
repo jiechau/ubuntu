@@ -27,8 +27,8 @@ do_dockerhub:
   image: docker:latest
   stage: build_dockerhub
   script:
-    #- docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_PASSWORD 
-    #- docker build . -t jiechau/ubuntu:22.04 -t jiechau/ubuntu:latest -t jiechau/ubuntu
+    - docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_PASSWORD 
+    - docker build . -t jiechau/ubuntu:22.04 -t jiechau/ubuntu:latest -t jiechau/ubuntu
     #
     - docker push jiechau/ubuntu
     - docker push jiechau/ubuntu:22.04
