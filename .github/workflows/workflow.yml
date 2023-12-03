@@ -29,4 +29,6 @@ jobs:
         context: .
         file: ./Dockerfile
         push: true
-        tags: ghcr.io/jiechau/ubuntu:latest
+        tags: |
+          ghcr.io/jiechau/ubuntu:latest
+          ghcr.io/jiechau/ubuntu:22.04

@@ -1,3 +1,5 @@
+ubnutu 22.04 with net-tools
+
 docker build . -t jiechau/ubuntu:22.04 -t jiechau/ubuntu:latest -t jiechau/ubuntu
 docker push jiechau/ubuntu
 docker push jiechau/ubuntu:22.04
