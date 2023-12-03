@@ -1,0 +1,15 @@
+FROM ubuntu:22.04
+
+ENV TZ="Asia/Taipei"
+RUN date
+RUN apt-get update && apt-get install -y htop nload telnet vim procps netcat
+RUN mkdir -p /root
+RUN echo "# alias    \n\
+PS1='\[\033[01;36m\]\w\[\033[00m\]\\n\[\033[01;32m\]\u@\h\[\033[00m\] # '  \n\
+alias ls='ls --color=auto' \n\
+alias ll='ls -al'  \n\
+alias h='history'  \n\
+set -o vi          \n"\
+> /root/.bashrc
+
+
