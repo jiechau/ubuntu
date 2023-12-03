@@ -23,6 +23,6 @@ build_image:
     - docker build . -t $CI_REGISTRY_IMAGE:22.04 -t $CI_REGISTRY_IMAGE:latest -t $CI_REGISTRY_IMAGE
     #
     - docker push $CI_REGISTRY_IMAGE
-    #- docker push jiechau/ubuntu:22.04
+    - docker push $CI_REGISTRY_IMAGE:22.04
   only:
     - main
