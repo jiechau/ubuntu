@@ -2,7 +2,7 @@ FROM ubuntu:22.04
 
 ENV TZ="Asia/Taipei"
 RUN date
-RUN apt-get update && apt-get install -y htop nload telnet vim procps netcat wget curl net-tools dnsutils iputils-ping
+RUN apt-get update && apt-get install -y htop nload telnet vim procps netcat wget curl net-tools dnsutils iputils-ping git apache2-utils
 
 RUN mkdir -p /root
 RUN echo "# alias    \n\
