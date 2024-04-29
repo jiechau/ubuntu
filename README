@@ -10,3 +10,21 @@ docker run -it --rm ghcr.io/jiechau/ubuntu
 kubectl run my-shell -it --rm -n aiapi --image jiechau/ubuntu -- bash
 kubectl run my-shell -it --rm -n aiapi --image registry.gitlab.com/jiechau/ubuntu -- bash
 kubectl run my-shell -it --rm -n aiapi --image ghcr.io/jiechau/ubuntu -- bash
+
+# or use a dummy command: ["/bin/bash", "-c", "tail -f /dev/null"]
+kubectl apply -f pod_ubuntu.yaml -n aiapi
+
+# pod_ubuntu.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-shell
+  namespace: aiapi
+spec:
+  containers:
+  - name: my-shell
+    image: jiechau/ubuntu:22.04
+    #command: ["/bin/bash"]
+    command: ["/bin/bash", "-c", "tail -f /dev/null"]
+    imagePullPolicy: Always
+
