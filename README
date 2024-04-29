@@ -13,6 +13,8 @@ kubectl run my-shell -it --rm -n aiapi --image ghcr.io/jiechau/ubuntu -- bash
 
 # or use a dummy command: ["/bin/bash", "-c", "tail -f /dev/null"]
 kubectl apply -f pod_ubuntu.yaml -n aiapi
+# or
+kubectl apply -f https://gitlab.com/jiechau/ubuntu/-/raw/main/pod_ubuntu.yaml -n aiapi
 
 # pod_ubuntu.yaml
 apiVersion: v1
