@@ -11,16 +11,16 @@ variables:
 services:
   - docker:dind
 
+before_script:
+  - docker run --rm --privileged multiarch/qemu-user-static --reset -p yes
+  - docker buildx create --use --name mybuilder
+
 do_gitlab:
   image: docker:latest
   stage: build_gitlab
   script:
     - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
-    - docker build . -t $CI_REGISTRY_IMAGE:22.04 -t $CI_REGISTRY_IMAGE:latest -t $CI_REGISTRY_IMAGE
-    ## docker run -it --rm registry.gitlab.com/jiechau/ubuntu
-    - docker push $CI_REGISTRY_IMAGE
-    - docker push $CI_REGISTRY_IMAGE:latest
-    - docker push $CI_REGISTRY_IMAGE:22.04
+    - docker buildx build --platform linux/amd64,linux/arm64 -t $CI_REGISTRY_IMAGE:$IMAGE_TAG -t $CI_REGISTRY_IMAGE:22.04 --push .
   only:
     - main
 
@@ -28,11 +28,7 @@ do_dockerhub:
   image: docker:latest
   stage: build_dockerhub
   script:
-    - docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_PASSWORD 
-    - docker build . -t jiechau/ubuntu:22.04 -t jiechau/ubuntu:latest -t jiechau/ubuntu
-    ## docker run -it --rm jiechau/ubuntu 
-    - docker push jiechau/ubuntu
-    - docker push jiechau/ubuntu:latest
-    - docker push jiechau/ubuntu:22.04
+    - docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_PASSWORD
+    - docker buildx build --platform linux/amd64,linux/arm64 -t jiechau/ubuntu:$IMAGE_TAG -t jiechau/ubuntu:22.04 --push .
   only:
     - main
